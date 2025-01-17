@@ -56,7 +56,7 @@ resource "aws_iam_role_policy_attachment" "cloudwatch_logs_policy_attachment" {
 
 resource "aws_amplify_app" "block_app" {
   name       = "block_app"
-  repository = "https://github.com/Tolu-Orina/BlockChainApp"
+  repository = "https://github.com/Tolu-Orina/Conqueror-Foundation"
 
   build_spec = file("${path.root}/../amplify.yml")
 
