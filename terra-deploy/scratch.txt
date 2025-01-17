@@ -1,0 +1,9 @@
+terraform state push terraform.tfstate.backup
+
+terraform init
+
+terraform plan
+
+terraform apply -auto-approve
+
+Success1#
