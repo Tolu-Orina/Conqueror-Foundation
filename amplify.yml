@@ -1,8 +1,8 @@
 version: 1
 applications:
-  - appRoot: test2
+  - appRoot: ./
     frontend:
-      buildPath: test2
+      buildPath: ./
       phases:
         preBuild:
           commands:
