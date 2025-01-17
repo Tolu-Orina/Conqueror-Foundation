@@ -1,102 +1,107 @@
-import React from "react";
+"use client";
+import React, { useState } from 'react';
 
-const Footer: React.FC = () => {
+const Footer = () => {
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    // Add newsletter subscription logic here
+    setEmail('');
+  };
+
+  const quickLinks = [
+    { href: '#about', text: 'About Us' },
+    { href: '#services', text: 'Services' },
+    { href: '#contact', text: 'Contact Us' },
+    { href: '#privacy', text: 'Privacy Policy' },
+  ];
+
+  const contactInfo = [
+    { label: 'Hotline', value: '123-456-7890' },
+    { label: 'Ambulance', value: '123-456-7890' },
+    { label: 'Location', value: 'Lagos, Nigeria' },
+  ];
+
   return (
-    <footer className="bg-blue-900 text-white py-12">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Column 1: Logo & Mission */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Conqueror Foundation</h2>
-          <p className="text-sm text-gray-300">
-            Our mission is to create awareness, provide resources, and advocate
-            for better healthcare solutions while fostering a supportive
-            community.
+    <footer className="bg-blue-900 text-white">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Column 1: Logo & Mission */}
+          <div className="space-y-4">
+            <h2 className="text-xl md:text-2xl font-bold">Conqueror Foundation</h2>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Our mission is to create awareness, provide resources, and advocate
+              for better healthcare solutions while fostering a supportive
+              community.
+            </p>
+          </div>
+
+          {/* Column 2: Quick Links */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-gray-300 hover:text-white hover:underline transition-colors duration-200 text-sm"
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Contact Info */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Contact</h3>
+            <ul className="space-y-2">
+              {contactInfo.map((info) => (
+                <li key={info.label} className="text-sm">
+                  <span className="font-semibold">{info.label}:</span>{' '}
+                  <span className="text-gray-300">{info.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Newsletter */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Newsletter</h3>
+            <p className="text-sm text-gray-300">
+              Subscribe to stay updated on the latest healthcare news and
+              resources.
+            </p>
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="relative">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md transition-colors duration-200 text-sm"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="border-t border-gray-700 mt-8 pt-6 text-center">
+          <p className="text-sm text-gray-400">
+            &copy; {new Date().getFullYear()} Conqueror Foundation. All rights
+            reserved.
           </p>
         </div>
-
-        {/* Column 2: Quick Links */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-          <ul>
-            <li className="mb-2">
-              <a
-                href="#about"
-                className="hover:underline text-gray-300"
-              >
-                About Us
-              </a>
-            </li>
-            <li className="mb-2">
-              <a
-                href="#services"
-                className="hover:underline text-gray-300"
-              >
-                Services
-              </a>
-            </li>
-            <li className="mb-2">
-              <a
-                href="#contact"
-                className="hover:underline text-gray-300"
-              >
-                Contact Us
-              </a>
-            </li>
-            <li>
-              <a
-                href="#privacy"
-                className="hover:underline text-gray-300"
-              >
-                Privacy Policy
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Column 3: Contact Info */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Contact</h3>
-          <ul>
-            <li className="mb-2">
-              <span className="font-bold">Hotline:</span> 123-456-7890
-            </li>
-            <li className="mb-2">
-              <span className="font-bold">Ambulance:</span> 123-456-7890
-            </li>
-            <li>
-              <span className="font-bold">Location:</span> Lagos, Nigeria
-            </li>
-          </ul>
-        </div>
-
-        {/* Column 4: Newsletter */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
-          <p className="text-sm text-gray-300 mb-4">
-            Subscribe to stay updated on the latest healthcare news and
-            resources.
-          </p>
-          <form>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="border-t border-gray-700 mt-8 pt-4 text-center">
-        <p className="text-sm text-gray-400">
-          &copy; {new Date().getFullYear()} Healthcare Plus. All rights
-          reserved.
-        </p>
       </div>
     </footer>
   );

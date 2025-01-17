@@ -1,5 +1,4 @@
-
-import React from "react";
+import React from 'react';
 
 const valuesData = [
   {
@@ -29,26 +28,28 @@ const valuesData = [
   },
 ];
 
-const Values: React.FC = () => {
-
+const Values = () => {
   return (
-    <section className="bg-gradient-to-b from-white to-blue-50 py-12">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">Our Values</h2>
-        <div className="mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
+    <section className="bg-gradient-to-b from-white to-blue-50 pt-24 md:pt-32 pb-8 md:pb-12">
+      <div className="container mx-auto px-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8 text-center">
+          Our Values
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
           {valuesData.map((value, index) => (
             <div
               key={index}
-              className="relative bg-white rounded-lg p-6 transition-all duration-300 shadow-lg"
+              className="group bg-white rounded-lg p-4 md:p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
             >
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                {value.title}
-              </h3>
-              
-                <p className="text-gray-600 text-sm transition-opacity duration-300 opacity-100">
+              <div className="flex flex-col h-full">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3">
+                  {value.title}
+                </h3>
+                <p className="text-gray-600 text-sm md:text-base flex-grow">
                   {value.description}
                 </p>
-              
+                <div className="h-1 w-12 bg-blue-500 mt-4 group-hover:w-full transition-all duration-300"></div>
+              </div>
             </div>
           ))}
         </div>

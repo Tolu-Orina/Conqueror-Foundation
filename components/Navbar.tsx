@@ -1,36 +1,47 @@
-import React from "react";
+"use client";
+import React, { useState } from 'react';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const navLinks = [
+    { href: '#home', text: 'Home' },
+    { href: '#about', text: 'About Us' },
+    { href: '#education', text: 'Education Resources' },
+    { href: '#supportive-service', text: 'Supportive Service' },
+    { href: '#get-involve', text: 'Get Involved' },
+  ];
+
   return (
-    <header className="bg-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+    <header className="bg-white shadow-md relative">
+      <div className="container mx-auto flex items-center justify-between py-4 px-4 lg:px-6">
         {/* Logo */}
         <div className="flex items-center">
           <img
             src="/cf-logo.png"
             alt="Conqueror Foundation Logo"
-            className="h-10"
+            className="h-8 lg:h-10"
           />
-          <span className="ml-5 text-blue-700 text-2xl"> Conqueror Foundation </span>
+          <span className="ml-2 lg:ml-5 text-blue-700 text-lg lg:text-2xl font-bold">
+            Conqueror Foundation
+          </span>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="hidden md:flex space-x-8 text-black">
-          <a href="#home" className="hover:text-red-600 transition">
-            Home
-          </a>
-          <a href="#about" className="hover:text-red-600 transition">
-            About Us
-          </a>
-          <a href="#education" className="hover:text-red-600 transition">
-            Education Resources
-          </a>
-          <a href="#supportive-service" className="hover:text-red-600 transition">
-            Supportive Service
-          </a>
-          <a href="#get-involve" className="hover:text-red-600 transition">
-            Get Involved
-          </a>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex space-x-6 lg:space-x-8 text-black">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="hover:text-red-600 transition text-sm lg:text-base"
+            >
+              {link.text}
+            </a>
+          ))}
         </nav>
 
         {/* Search and Menu Icons */}
@@ -38,7 +49,7 @@ const Navbar: React.FC = () => {
           <button className="text-black hover:text-red-600 transition">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5 lg:h-6 lg:w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -51,7 +62,10 @@ const Navbar: React.FC = () => {
               />
             </svg>
           </button>
-          <button className="sm:hidden text-black hover:text-red-600 transition">
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-black hover:text-red-600 transition"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -63,31 +77,30 @@ const Navbar: React.FC = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
+                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
               />
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu (Hidden by default) */}
-      <div className="md:hidden">
-        <nav className="flex flex-col space-y-4 px-6 pb-4">
-          <a href="#home" className="text-black hover:text-red-600 transition">
-            Home
-          </a>
-          <a href="#about" className="text-black hover:text-red-600 transition">
-            About Us
-          </a>
-          <a href="#education" className="text-black hover:text-red-600 transition">
-            Education Resources
-          </a>
-          <a href="#supportive-service" className="text-black hover:text-red-600 transition">
-            Supportive Service
-          </a>
-          <a href="#get-involve" className="text-black hover:text-red-600 transition">
-            Get Involve
-          </a>
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden absolute w-full bg-white shadow-lg transition-all duration-300 ease-in-out ${
+          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+        }`}
+      >
+        <nav className="flex flex-col space-y-4 px-6 py-4">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-black hover:text-red-600 transition text-sm"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {link.text}
+            </a>
+          ))}
         </nav>
       </div>
     </header>

@@ -100,6 +100,12 @@ resource "aws_amplify_domain_association" "cf_website" {
   app_id      = aws_amplify_app.cf_website.id
   domain_name = "conquerorfoundation.com"
 
+  # https://example.com
+  sub_domain {
+    branch_name = aws_amplify_branch.main_prod.branch_name
+    prefix      = ""
+  }
+
   # https://www.conquerorfoundation.com
   sub_domain {
     branch_name = aws_amplify_branch.main_prod.branch_name
